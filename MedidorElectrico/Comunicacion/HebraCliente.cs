@@ -22,17 +22,15 @@ namespace MedidorElectrico.Comunicacion
 
         public void Ejecutar()
         {
-            clienteCom.Escribir("Ingrese Nro Medidor : ");
-            uint nroMedidor = Convert.ToUInt32(clienteCom.Leer());
-            clienteCom.Escribir("Ingrese fecha: ");
-            DateTime fecha = Convert.ToDateTime(clienteCom.Leer());
-            clienteCom.Escribir("Ingrese valor consumo: ");
-            double valorConsumo = Convert.ToDouble(clienteCom.Leer());
+            clienteCom.Escribir("Ingrese lectura : ");
+            string leer = clienteCom.Leer();
+            string[] arr = leer.Trim().Split('|');
+
             Lectura lectura = new Lectura()
             {
-                NroMedidor = nroMedidor,
-                Fecha = fecha,
-                ValorConsumo = valorConsumo
+                NroMedidor = Convert.ToUInt32(arr[0]),
+                Fecha = DateTime.ParseExact(arr[1], "yyyy-MM-dd-HH-mm-ss", null),
+                ValorConsumo = Convert.ToDouble(arr[2])
             };
             lock (lecturasDAL)
             {

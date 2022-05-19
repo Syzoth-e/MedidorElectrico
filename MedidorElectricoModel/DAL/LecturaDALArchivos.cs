@@ -30,32 +30,28 @@ namespace MedidorElectricoModel.DAL
         private static string archivo = url + "/lecturas.txt";
         public void IngresarLectura(Lectura lectura)
         {
-
+            
             try
             {
                 Boolean existeMedidor = false;
                 MedidoresDAL medidoresDal = new MedidoresDAL();
                 List<Medidor> medidores = medidoresDal.ObtenerMedidores();
-                foreach (Medidor medidor in medidores)
-                {
-                    if (medidor.NroMedidor == lectura.NroMedidor)
-                    {
-                        existeMedidor = true;
+                foreach(Medidor medidor in medidores){
+                    if(medidor.NroMedidor == lectura.NroMedidor){
+                        existeMedidor=true;
                     }
                 }
-                if (existeMedidor)
+                if(existeMedidor)
                 {
                     using (StreamWriter writer = new StreamWriter(archivo, true))
                     {
                         writer.WriteLine(lectura.NroMedidor + "|" + lectura.Fecha + "|" + lectura.ValorConsumo);
                         writer.Flush();
                     }
-                }
-                else
-                {
+                }else{
                     Console.WriteLine("ERROR, NO EXISTE MEDIDOR");
                 }
-            }
+                }
             catch (Exception)
             {
 
@@ -72,7 +68,7 @@ namespace MedidorElectricoModel.DAL
                     do
                     {
                         texto = reader.ReadLine();
-                        if (texto != null)
+                        if (texto != null && texto.Length > 0)
                         {
                             string[] arr = texto.Trim().Split('|');
                             Lectura Lectura = new Lectura()
@@ -82,6 +78,11 @@ namespace MedidorElectricoModel.DAL
                                 ValorConsumo = Convert.ToDouble(arr[2])
                             };
                             lista.Add(Lectura);
+                        }
+
+                        if(lista.Count == 0)
+                        {
+                            Console.WriteLine("NO SE ENCUENTRAN LECTURAS");
                         }
 
                     } while (texto != null);
