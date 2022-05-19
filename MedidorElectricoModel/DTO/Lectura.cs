@@ -18,7 +18,7 @@ namespace MedidorElectricoModel.DTO
 
         public override string ToString()
         {
-            return nroMedidor + "|" + fecha.ToString("dd-MM-yyyy-HH-mm-s") + "|" + valorConsumo;
+            return nroMedidor + "|" + fecha.ToString("yyyy-MM-dd-HH-mm-s") + "|" + valorConsumo;
         }
     }
 }

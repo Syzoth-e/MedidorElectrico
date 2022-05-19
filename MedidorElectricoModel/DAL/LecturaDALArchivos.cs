@@ -79,13 +79,8 @@ namespace MedidorElectricoModel.DAL
                             };
                             lista.Add(Lectura);
                         }
-
-                        if(lista.Count == 0)
-                        {
-                            Console.WriteLine("NO SE ENCUENTRAN LECTURAS");
-                        }
-
                     } while (texto != null);
+
                 }
             }
             catch (Exception)

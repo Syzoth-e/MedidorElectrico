@@ -50,10 +50,16 @@ namespace MedidorElectrico
             {
                 lecturas = lecturaDAL.ObtenerLecturas();
             };
-
-            foreach (Lectura lectura in lecturas)
+            if(lecturas != null && lecturas.Count > 0)
             {
-                Console.WriteLine(lectura);
+                foreach (Lectura lectura in lecturas)
+                {
+                    Console.WriteLine(lectura);
+                }
+            }
+            else
+            {
+                Console.WriteLine("NO SE ENCUENTRAN LECTURAS");
             }
         }
 
